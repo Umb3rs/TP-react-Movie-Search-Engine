@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
+// import axios from 'axios'
+import './App.css'
+
+import Search from './components/Search'
 
 function App() {
+  const [state, setState] = useState({
+    s:"",
+    results:[],
+    selected: {}
+
+  });
+  const apiurl =" https://api.themoviedb.org/3/movie/550?api_key=2f071489721e98854152263cf924a450"
+
+  // const search = (e) => {
+  //   if (e.key === "Enter"){
+
+  //   }
+  // }
+
+  const handleInput = (e) => {
+    let s =e.target.value;
+
+    setState(prevState => {
+      return {...prevState, s: s }
+    });
+    console.log(state.s);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <header>
+        <h1>The shrimp cocktail</h1>
+        </header>
+        <main>
+          <Search handleInput={handleInput} />
+        </main>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default App
